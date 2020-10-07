@@ -29,6 +29,7 @@ aws_secret_access_key = YYY
 - Create a file named `config` in the project root folder. This file will override your current
   `~/.aws/config` file and its structure is described in the
   [Configuration and credential file settings AWS doc](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+- `npm start` to start the wizard!
 
 ## Additional documentation
 
