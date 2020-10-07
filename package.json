@@ -1,0 +1,22 @@
+{
+  "name": "aws-get-session-token",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env AWS_SDK_LOAD_CONFIG=true node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org-philipmorrisdev:philipmorrisdev/aws-get-session-token.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.768.0",
+    "chalk": "^4.1.0",
+    "clear": "^0.1.0",
+    "cross-env": "^7.0.2",
+    "inquirer": "^7.3.3"
+  }
+}

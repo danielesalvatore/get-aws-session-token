@@ -1,0 +1,8 @@
+[profile my-production]
+role_arn = arn:aws:iam::000000000000:role/InfrastructureAdminRole
+source_profile = session
+region = eu-west-1
+
+[profile my-sandbox]
+source_profile = session
+region = eu-west-1`

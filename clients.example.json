@@ -1,0 +1,14 @@
+{
+  "MyClient": {
+    "MFAarn": "arn:aws:iam::000:mfa/daniele.salvatore",
+    "AccessKeyId": "xxx",
+    "SecretAccessKey": "xxx",
+    "SourceProfile": "my"
+  },
+  "MySecondClient": {
+    "MFAarn": "arn:aws:iam::000:mfa/daniele.salvatore",
+    "AccessKeyId": "xxx",
+    "SecretAccessKey": "xxx",
+    "Profile": "my-profile (this is optional)"
+  }
+}
