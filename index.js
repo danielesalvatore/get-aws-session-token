@@ -4,7 +4,7 @@ var clear = require('clear');
 var inquirer = require('inquirer');
 var AWS = require("aws-sdk");
 var chalk = require('chalk');
-
+var rimraf = require("rimraf")
 
 const error = chalk.bold.red;
 //const warning = chalk.keyword('orange');
@@ -17,10 +17,11 @@ const init = async () => {
     clear();
 
     // Pre fetch configuration file
-    var CLIENTS_FILE_PATH = resolve("./clients.json")
-    var MY_AWS_CONF_FILE_PATH = resolve("./config")
-    var MY_TMP_AWS_CONF_FILE_PATH = resolve("./tmp_config")
-    var AWS_CONF_FILE_PATH = resolve("~/.aws/config")
+    var CLIENTS_FILE_PATH = resolve(`${__dirname}/clients.json`)
+    var MY_AWS_CONF_FILE_PATH = resolve(`${__dirname}/config`)
+    var MY_TMP_AWS_CONF_FILE_PATH = resolve(`${__dirname}/tmp_config`)
+    const HOME_DIR = require('os').homedir();
+    var AWS_CONF_FILE_PATH = resolve(`${HOME_DIR}/.aws/config`)
     var clientsFile;
 
     // Check client exist
@@ -59,8 +60,7 @@ const init = async () => {
             validate: function (value) {
                 var valid = !isNaN(parseFloat(value));
                 return (valid && String(value).length === 6) || 'Please enter a valid MFA code number (6 digits)';
-            },
-            filter: Number,
+            }
         }
     ];
     // Remove null steps
@@ -74,11 +74,12 @@ const init = async () => {
 
     const profile = clientConfig.Profile
     if (!!profile) {
-        console.log(info(`Using AWS profile:`), success(profile))
+        console.log(info(`Using AWS named profile:`), success(profile))
         var credentials = new AWS.SharedIniFileCredentials({ profile });
         AWS.config.credentials = credentials;
+    } else {
+        console.log(info(`Using AWS named profile:`), success("default"))
     }
-
 
     var sts = new AWS.STS();
     var params = {
@@ -99,6 +100,7 @@ const init = async () => {
     const { AccessKeyId, SecretAccessKey, SessionToken } = Credentials
 
     // Create a temp AWS config file
+    rimraf.sync(MY_TMP_AWS_CONF_FILE_PATH)
     fs.copyFileSync(MY_AWS_CONF_FILE_PATH, MY_TMP_AWS_CONF_FILE_PATH)
 
     // Print AWS config file
@@ -110,6 +112,9 @@ const init = async () => {
 
     // Move the newly generated config file to the correct folder
     fs.copyFileSync(MY_TMP_AWS_CONF_FILE_PATH, AWS_CONF_FILE_PATH)
+
+    // Clean up!
+    rimraf.sync(MY_TMP_AWS_CONF_FILE_PATH)
 
     console.log(success("Done!"))
 }
