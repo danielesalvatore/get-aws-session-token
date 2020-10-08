@@ -45,7 +45,7 @@ const init = async () => {
     }
 
     const clients = Object.keys(clientsFile)
-    const hasSeverlalClient = clients.length > 0;
+    const hasSeverlalClient = clients.length > 1;
 
     console.log(info('Hi, let get an AWS session token!'));
 
@@ -73,7 +73,7 @@ const init = async () => {
     // Get info from user
     const answers = await inquirer.prompt(questions);
 
-    const { client } = answers;
+    const { client = clients[0] } = answers;
     const clientConfig = clientsFile[client];
 
     // Input validation
