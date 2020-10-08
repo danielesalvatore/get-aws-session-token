@@ -2,25 +2,21 @@
 
 A simple Node.js command line wizard to generate AWS session tokens for MFA-enabled users.
 
+![How 'gast' works](./gast.gif)
+
 ## Getting started
 
 - Make sure you have the AWS CLI installed
-- Backup your `~/.aws/credentials` and `~/.aws/config` files (!)
-- Make sure you have a valid AWS user security credentials (Access key Id, Secret access key)
-- Use the AWS user security credentials to configure a profile in you `~/.aws/credentials` file
-  following the above structure. If this is your first profile you can name it `default`, otherwise
-  pick a name that you'll use later
+- Backup your `~/.aws/credentials` and `~/.aws/config` files (!!!)
+- Make sure you have a valid AWS CLI user configured. Your `~/.aws/credentials` file should contain
+  a configuration simlar to the one below. Take note of the profile name (in the example
+  `my-nice-profile`), as it will be needed later. If you have only one profile configured, it is
+  generally called `default`
 
 ```
 [my-nice-profile]
 aws_access_key_id = XXX
 aws_secret_access_key = YYY
-```
-
-- Install `Get AWS Session Token` using:
-
-```bash
-npm install get-aws-session-token -g
 ```
 
 - Create a file named `config.template` in `~/.aws/` folder, following the example you find below or
@@ -38,7 +34,13 @@ npm install get-aws-session-token -g
 
   [Configuration and credential file settings AWS doc](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
 
-- type `gast` command in the terminal to start the wizard and get your AWS session token!
+- Install `Get AWS Session Token` using:
+
+```bash
+npm install get-aws-session-token -g
+```
+
+- Run `gast` command in the terminal to start the wizard and get your AWS session token!
 
 ## `clients.json` file example
 
