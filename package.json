@@ -1,16 +1,25 @@
 {
-  "name": "aws-get-session-token",
-  "version": "1.0.0",
-  "description": "",
+  "name": "get-aws-session-token",
+  "version": "0.9.0",
+  "description": "A simple Node.js command line wizard to generate AWS session tokens for MFA-enabled users.",
   "main": "index.js",
   "scripts": {
     "start": "cross-env AWS_SDK_LOAD_CONFIG=true node ."
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org-philipmorrisdev:philipmorrisdev/aws-get-session-token.git"
+    "url": "git@github.com:danielesalvatore/get-aws-session-token.git"
   },
-  "author": "",
+  "author": "Daniele Salvatore <danieleslvtr@gmail.com>",
+  "keywords": [
+    "aws",
+    "cli",
+    "profile",
+    "mfa",
+    "2-factor",
+    "multi-factor",
+    "authentication"
+  ],
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.768.0",

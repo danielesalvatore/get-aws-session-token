@@ -1,4 +1,4 @@
-# AWS Get Session Token
+# Get AWS Session Token easily
 
 A simple Node.js command line wizard to generate AWS session tokens for MFA-enabled users.
 
@@ -9,6 +9,7 @@ A simple Node.js command line wizard to generate AWS session tokens for MFA-enab
 - Use the AWS user security credentials to configure a profile in you `~/.aws/credentials` file
   following the above structure. If this is your first profile you can name it `default`, otherwise
   pick a nice name that you'll use later
+- Backup your `~/.aws/credentials` and `~/.aws/config` files (!)
 
 ```
 [my-nice-profile]
@@ -16,7 +17,15 @@ aws_access_key_id = XXX
 aws_secret_access_key = YYY
 ```
 
-- Backup your `~/.aws/credentials` and `~/.aws/config` files
+- Install `Get AWS Session Token` using one of the following commands
+
+```bash
+npm install get-aws-session-token
+# or
+yarn add get-aws-session-token
+```
+
+- Browse the `Get AWS Session Token` folder
 - Create a file named `clients.json` from the `clients.example.json` in the project root folder, and
   compile the clients configuration.
 - Each client configuration may include the following parameters attributes:
@@ -27,9 +36,9 @@ aws_secret_access_key = YYY
   - `Profile`: (optional) if you want to use a specific AWS named profile to generate the session.
     This is the nice name you picked earlier This is token
 - Create a file named `config` in the project root folder. This file will override your current
-  `~/.aws/config` file and its structure is described in the
+  `~/.aws/config` file (!) and its structure is described in the
   [Configuration and credential file settings AWS doc](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
-- `npm start` to start the wizard!
+- `npx get-aws-` to start the wizard!
 
 ## Additional documentation
 
