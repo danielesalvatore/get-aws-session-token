@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var fs = require('fs')
 var resolve = require('path').resolve
 var clear = require('clear');
@@ -17,10 +19,10 @@ const init = async () => {
     clear();
 
     // Pre fetch configuration file
-    var CLIENTS_FILE_PATH = resolve(`${__dirname}/clients.json`)
-    var MY_AWS_CONF_FILE_PATH = resolve(`${__dirname}/config`)
-    var MY_TMP_AWS_CONF_FILE_PATH = resolve(`${__dirname}/tmp_config`)
     const HOME_DIR = require('os').homedir();
+    var CLIENTS_FILE_PATH = resolve(`${HOME_DIR}/clients.json`)
+    var MY_AWS_CONF_FILE_PATH = resolve(`${HOME_DIR}/config.template`)
+    var MY_TMP_AWS_CONF_FILE_PATH = resolve(`${HOME_DIR}/tmp_config`)
     var AWS_CONF_FILE_PATH = resolve(`${HOME_DIR}/.aws/config`)
     var clientsFile;
 
@@ -28,7 +30,7 @@ const init = async () => {
     try {
         fs.existsSync(CLIENTS_FILE_PATH)
     } catch (err) {
-        console.log(error("Configuration file missing! Create your ./clients.json file from ./clients.example.json"))
+        console.log(error("Configuration file missing! Create your HOME_DIR/clients.json file"))
         return
     }
 
@@ -36,7 +38,7 @@ const init = async () => {
     try {
         clientsFile = JSON.parse(fs.readFileSync(CLIENTS_FILE_PATH, 'utf8'));
     } catch (err) {
-        console.log(error("Configuration file seems to be an invalid JSON file!"))
+        console.log(error("HOME_DIR/clients.json configuration file seems to be an invalid JSON file!"))
         return
     }
 
@@ -50,13 +52,13 @@ const init = async () => {
             {
                 type: 'list',
                 name: 'client',
-                message: 'For who are you working for today?',
+                message: 'Which AWS account will you use?',
                 choices: clients
             } : null,
         {
             type: 'input',
             name: 'mfa',
-            message: 'Specify your MFA code?',
+            message: 'Insert your MFA code',
             validate: function (value) {
                 var valid = !isNaN(parseFloat(value));
                 return (valid && String(value).length === 6) || 'Please enter a valid MFA code number (6 digits)';

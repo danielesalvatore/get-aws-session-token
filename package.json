@@ -10,7 +10,10 @@
     "type": "git",
     "url": "git@github.com:danielesalvatore/get-aws-session-token.git"
   },
-  "author": "Daniele Salvatore <danieleslvtr@gmail.com>",
+  "bin": {
+    "gast": "./index.js"
+  },
+  "author": "Daniele bSalvatore <danieleslvtr@gmail.com>",
   "keywords": [
     "aws",
     "cli",

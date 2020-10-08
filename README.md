@@ -9,7 +9,6 @@ A simple Node.js command line wizard to generate AWS session tokens for MFA-enab
 - Use the AWS user security credentials to configure a profile in you `~/.aws/credentials` file
   following the above structure. If this is your first profile you can name it `default`, otherwise
   pick a nice name that you'll use later
-- Backup your `~/.aws/credentials` and `~/.aws/config` files (!)
 
 ```
 [my-nice-profile]
@@ -17,6 +16,7 @@ aws_access_key_id = XXX
 aws_secret_access_key = YYY
 ```
 
+- Backup your `~/.aws/credentials` and `~/.aws/config` files (!)
 - Install `Get AWS Session Token` using one of the following commands
 
 ```bash
@@ -39,6 +39,38 @@ yarn add get-aws-session-token
   `~/.aws/config` file (!) and its structure is described in the
   [Configuration and credential file settings AWS doc](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
 - `npx get-aws-` to start the wizard!
+
+## `clients.json` file example
+
+```json
+{
+  "MyClient": {
+    "MFAarn": "arn:aws:iam::000:mfa/daniele.salvatore",
+    "AccessKeyId": "xxx",
+    "SecretAccessKey": "xxx",
+    "SourceProfile": "my"
+  },
+  "MySecondClient": {
+    "MFAarn": "arn:aws:iam::000:mfa/daniele.salvatore",
+    "AccessKeyId": "xxx",
+    "SecretAccessKey": "xxx",
+    "Profile": "my-profile (this is optional)"
+  }
+}
+```
+
+## `config.template` file example
+
+```
+[profile my-production]
+role_arn = arn:aws:iam::000000000000:role/InfrastructureAdminRole
+source_profile = session
+region = eu-west-1
+
+[profile my-sandbox]
+source_profile = session
+region = eu-west-1`
+```
 
 ## Additional documentation
 
