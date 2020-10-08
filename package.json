@@ -13,7 +13,7 @@
   "bin": {
     "gast": "./index.js"
   },
-  "author": "Daniele bSalvatore <danieleslvtr@gmail.com>",
+  "author": "Daniele Salvatore <danieleslvtr@gmail.com>",
   "keywords": [
     "aws",
     "cli",
