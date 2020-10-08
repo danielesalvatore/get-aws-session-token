@@ -20,17 +20,18 @@ const init = async () => {
 
     // Pre fetch configuration file
     const HOME_DIR = require('os').homedir();
-    var CLIENTS_FILE_PATH = resolve(`${HOME_DIR}/clients.json`)
-    var MY_AWS_CONF_FILE_PATH = resolve(`${HOME_DIR}/config.template`)
-    var MY_TMP_AWS_CONF_FILE_PATH = resolve(`${HOME_DIR}/tmp_config`)
-    var AWS_CONF_FILE_PATH = resolve(`${HOME_DIR}/.aws/config`)
+    const AWS_CLI_HOME = `${HOME_DIR}/.aws`
+    var CLIENTS_FILE_PATH = resolve(`${AWS_CLI_HOME}/clients.json`)
+    var MY_AWS_CONF_FILE_PATH = resolve(`${AWS_CLI_HOME}/config.template`)
+    var MY_TMP_AWS_CONF_FILE_PATH = resolve(`${AWS_CLI_HOME}/tmp_config`)
+    var AWS_CONF_FILE_PATH = resolve(`${AWS_CLI_HOME}/config`)
     var clientsFile;
 
     // Check client exist
     try {
         fs.existsSync(CLIENTS_FILE_PATH)
     } catch (err) {
-        console.log(error("Configuration file missing! Create your HOME_DIR/clients.json file"))
+        console.log(error("Configuration file missing! Create your ~/.aws/clients.json file"))
         return
     }
 
@@ -38,7 +39,8 @@ const init = async () => {
     try {
         clientsFile = JSON.parse(fs.readFileSync(CLIENTS_FILE_PATH, 'utf8'));
     } catch (err) {
-        console.log(error("HOME_DIR/clients.json configuration file seems to be an invalid JSON file!"))
+        console.log(fs.readFileSync(CLIENTS_FILE_PATH, 'utf8'))
+        console.log(error("~/.aws/clients.json configuration file seems to be an invalid JSON file!"))
         return
     }
 
@@ -74,6 +76,13 @@ const init = async () => {
     const { client } = answers;
     const clientConfig = clientsFile[client];
 
+    // Input validation
+    if (!clientConfig.MFASerialNumber || !clientConfig.OutputProfileName) {
+        console.log(error(`'${client}' client configuration in ~/.aws/clients.json seems to be invalid! Missing one of the mandatory attributes: 'MFASerialNumber', 'OutputProfileName'`))
+        return
+    }
+
+    // Select AWS profile, if available
     const profile = clientConfig.Profile
     if (!!profile) {
         console.log(info(`Using AWS named profile:`), success(profile))
@@ -118,6 +127,10 @@ const init = async () => {
     // Clean up!
     rimraf.sync(MY_TMP_AWS_CONF_FILE_PATH)
 
+    console.log()
+    console.log(info(`Successfully created new AWS named profile:`), success(clientConfig.OutputProfileName))
+    console.log(info(`Use this profile to interact with AWS`))
+    console.log()
     console.log(success("Done!"))
 }
 

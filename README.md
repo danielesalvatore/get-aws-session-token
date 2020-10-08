@@ -45,16 +45,13 @@ yarn add get-aws-session-token
 ```json
 {
   "MyClient": {
-    "MFAarn": "arn:aws:iam::000:mfa/daniele.salvatore",
-    "AccessKeyId": "xxx",
-    "SecretAccessKey": "xxx",
-    "SourceProfile": "my"
+    "Profile": "my-profile (this is optional)",
+    "MFASerialNumber": "arn:aws:iam::000:mfa/daniele.salvatore",
+    "OutputProfileName": "xxx"
   },
   "MySecondClient": {
-    "MFAarn": "arn:aws:iam::000:mfa/daniele.salvatore",
-    "AccessKeyId": "xxx",
-    "SecretAccessKey": "xxx",
-    "Profile": "my-profile (this is optional)"
+    "MFASerialNumber": "arn:aws:iam::000:mfa/daniele.salvatore",
+    "OutputProfileName": "yyy"
   }
 }
 ```
