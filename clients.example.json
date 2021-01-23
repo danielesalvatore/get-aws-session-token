@@ -5,6 +5,7 @@
   },
   "MySecondClient": {
     "MFAarn": "arn:aws:iam::000:mfa/daniele.salvatore",
-    "Profile": "my-profile (this is optional)"
+    "Profile": "my-profile (this is optional)",
+    "Region": "eu-west-1 (this is optional)"
   }
 }
