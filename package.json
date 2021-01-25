@@ -1,6 +1,6 @@
 {
   "name": "get-aws-session-token",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "A simple Node.js command line wizard to generate AWS session tokens for MFA-enabled users.",
   "main": "index.js",
   "scripts": {

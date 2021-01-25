@@ -118,13 +118,18 @@ const init = async () => {
     fs.appendFileSync(MY_TMP_AWS_CONF_FILE_PATH, '\r\n');
     fs.appendFileSync(MY_TMP_AWS_CONF_FILE_PATH, `[profile ${clientConfig.OutputProfileName}]\r\n`);
     fs.appendFileSync(MY_TMP_AWS_CONF_FILE_PATH, `aws_access_key_id = ${AccessKeyId}\r\n`);
-    fs.appendFileSync(MY_TMP_AWS_CONF_FILE_PAT H, `aws_secret_access_key = ${SecretAccessKey}\r\n`);
+    fs.appendFileSync(MY_TMP_AWS_CONF_FILE_PATH, `aws_secret_access_key = ${SecretAccessKey}\r\n`);
     fs.appendFileSync(MY_TMP_AWS_CONF_FILE_PATH, `aws_session_token = ${SessionToken}\r\n`);
 
     // Optionally add a default region
     const region = clientConfig.Region
     if (!!region) {
         fs.appendFileSync(MY_TMP_AWS_CONF_FILE_PATH, `region = ${region}\r\n`);
+    }
+    // Optionally add a output
+    const output = clientConfig.Output
+    if (!!output) {
+        fs.appendFileSync(MY_TMP_AWS_CONF_FILE_PATH, `output = ${output}\r\n`);
     }
 
     // Move the newly generated config file to the correct folder

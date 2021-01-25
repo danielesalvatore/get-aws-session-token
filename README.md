@@ -32,6 +32,7 @@ aws_secret_access_key = YYY
   - `Profile`: (optional) if you want to use a specific AWS named profile to generate the session
     token. This is the name you picked earlier.
   - `Region`: (optional) if you want to use a default AWS region for the given AWS profile
+  - `Output`: (optional) specify the output format
 
   [Configuration and credential file settings AWS doc](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
 
